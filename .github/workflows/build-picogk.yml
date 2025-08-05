@@ -1,0 +1,30 @@
+name: Build PicoGK
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout PicoGK source
+      uses: actions/checkout@v3
+      with:
+        repository: leap71/PicoGK
+        path: PicoGK
+
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '6.0.x'
+
+    - name: Publish PicoGK
+      working-directory: PicoGK/src/PicoGK
+      run: dotnet publish -c Release -o out
+
+    - name: Upload PicoGK.dll artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: PicoGK-dll
+        path: PicoGK/src/PicoGK/out/PicoGK.dll
