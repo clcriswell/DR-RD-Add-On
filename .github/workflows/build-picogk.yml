@@ -20,11 +20,11 @@ jobs:
         dotnet-version: '6.0.x'
 
     - name: Publish PicoGK
-      working-directory: PicoGK/src/PicoGK
-      run: dotnet publish -c Release -o out
+      run: dotnet publish PicoGK/src/PicoGK/PicoGK.csproj -c Release -o PicoGK/src/PicoGK/out
 
     - name: Upload PicoGK.dll
       uses: actions/upload-artifact@v4
       with:
         name: PicoGK-dll
         path: PicoGK/src/PicoGK/out/PicoGK.dll
+
