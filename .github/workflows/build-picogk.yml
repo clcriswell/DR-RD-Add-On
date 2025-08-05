@@ -24,7 +24,7 @@ jobs:
       run: dotnet publish -c Release -o out
 
     - name: Upload PicoGK.dll artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v2
       with:
         name: PicoGK-dll
         path: PicoGK/src/PicoGK/out/PicoGK.dll
