@@ -1,30 +1,26 @@
-name: Build PicoGK
-
-on:
-  workflow_dispatch:
-
+name: Build PicoGK DLL
+on: workflow_dispatch        # run manually
 jobs:
   build:
-    runs-on: ubuntu-latest     # <-- use Linux
-
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout PicoGK source
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
-          repository: leap71/PicoGK
+          repository: leap71/PicoGK          # clone upstream repo
           path: PicoGK
 
-      - name: Setup .NET SDK
+      - name: Setup .NET 6
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '6.0.x'
 
-      - name: Publish PicoGK
-        # point directly at the .csproj
-        run: dotnet publish PicoGK/src/PicoGK/PicoGK.csproj -c Release -o PicoGK/src/PicoGK/out
+      - name: Publish library
+        run: dotnet publish PicoGK/PicoGK.csproj -c Release -o PicoGK/out
 
       - name: Upload PicoGK.dll
         uses: actions/upload-artifact@v4
         with:
           name: PicoGK-dll
-          path: PicoGK/src/PicoGK/out/PicoGK.dll
+          path: PicoGK/out/PicoGK.dll
+
