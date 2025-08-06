@@ -13,7 +13,8 @@ jobs:
       - name: Install .NET 9 preview
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '9.0.100-preview.*'
+          dotnet-version: '9.0.100'
+          dotnet-quality: 'preview'
           include-prerelease: true
 
       - name: Publish library
