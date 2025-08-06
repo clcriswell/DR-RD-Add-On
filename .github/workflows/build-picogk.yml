@@ -5,26 +5,26 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest     # <-- use Linux
 
     steps:
-    - name: Checkout PicoGK source
-      uses: actions/checkout@v3
-      with:
-        repository: leap71/PicoGK
-        path: PicoGK
+      - name: Checkout PicoGK source
+        uses: actions/checkout@v3
+        with:
+          repository: leap71/PicoGK
+          path: PicoGK
 
-    - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: '6.0.x'
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '6.0.x'
 
-    - name: Publish PicoGK
-      run: dotnet publish PicoGK/src/PicoGK/PicoGK.csproj -c Release -o PicoGK/src/PicoGK/out
+      - name: Publish PicoGK
+        # point directly at the .csproj
+        run: dotnet publish PicoGK/src/PicoGK/PicoGK.csproj -c Release -o PicoGK/src/PicoGK/out
 
-    - name: Upload PicoGK.dll
-      uses: actions/upload-artifact@v4
-      with:
-        name: PicoGK-dll
-        path: PicoGK/src/PicoGK/out/PicoGK.dll
-
+      - name: Upload PicoGK.dll
+        uses: actions/upload-artifact@v4
+        with:
+          name: PicoGK-dll
+          path: PicoGK/src/PicoGK/out/PicoGK.dll
