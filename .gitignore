@@ -1,6 +1,0 @@
-bin/
-obj/
-output/
-*.user
-*.vs/
-libs/*.dll
